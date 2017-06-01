@@ -17,7 +17,11 @@ services:
 
   php:
     container_name: sp-php
-    image: seeruk/php-fpm:7.0-dev
+    image: seeruk/php-fpm:7.1-dev
+# In case you want to use a dockerfile to extend current image
+#    build:
+#        context: .
+#        dockerfile: Dockerfile
     environment:
     # Set these to your UID and GID in the override file.
     # - PHP_UID=1000
