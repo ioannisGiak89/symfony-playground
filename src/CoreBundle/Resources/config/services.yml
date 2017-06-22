@@ -1,0 +1,49 @@
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    # makes classes in src/CoreBundle available to be used as services
+    CoreBundle\Controller\:
+        resource: "../../Controller/*"
+        # you can exclude directories or files
+        # but if a service is unused, it"s removed anyway
+        # exclude: "../../Controller/DefaultController"
+
+    CoreBundle\EventListener\:
+        resource: "../../EventListener/*"
+
+    CoreBundle\EventListener\PasswordEncoder:
+        tags:
+            - { name: doctrine.orm.entity_listener }
+            - { name: doctrine.orm.entity_listener, entity_manager: custom }
+
+    CoreBundle\Repository\UserRepository:
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments:
+        - CoreBundle\Entity\User
+
+    CoreBundle\Command\:
+        resource: "../../Command/*"
+        tags:
+            - { name: console.command }
+
+# This is the old way of defining services. I just
+# left it here as a reference. No need to specify
+# arguments anymore because of the auto wiring!
+#
+#    core.command.create_user_command:
+#        class: CoreBundle\Command\CreateUserCommand
+#        arguments:
+#        - CoreBundle\Repository\UserRepository
+#        tags:
+#            - { name: console.command }
+#
+#    core.command.delete_user_command:
+#        class: CoreBundle\Command\DeleteUserCommand
+#        arguments:
+#        - CoreBundle\Repository\UserRepository
+#        tags:
+#            - { name: console.command }

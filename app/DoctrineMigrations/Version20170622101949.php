@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20170530135021 extends AbstractMigration
+class Version20170622101949 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -18,9 +18,9 @@ class Version20170530135021 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
-        $this->addSql('CREATE SEQUENCE model_member_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
-        $this->addSql('CREATE TABLE model_member (id INT NOT NULL, name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, phone VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_5303DEE7E7927C74 ON model_member (email)');
+        $this->addSql('ALTER TABLE "user" ADD is_account_non_expired BOOLEAN NOT NULL');
+        $this->addSql('ALTER TABLE "user" ADD is_account_non_locked BOOLEAN NOT NULL');
+        $this->addSql('ALTER TABLE "user" ADD is_credentials_non_expired BOOLEAN NOT NULL');
     }
 
     /**
@@ -32,7 +32,8 @@ class Version20170530135021 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
         $this->addSql('CREATE SCHEMA public');
-        $this->addSql('DROP SEQUENCE model_member_id_seq CASCADE');
-        $this->addSql('DROP TABLE model_member');
+        $this->addSql('ALTER TABLE "user" DROP is_account_non_expired');
+        $this->addSql('ALTER TABLE "user" DROP is_account_non_locked');
+        $this->addSql('ALTER TABLE "user" DROP is_credentials_non_expired');
     }
 }
