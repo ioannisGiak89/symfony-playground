@@ -6,22 +6,23 @@ services:
     image: nginx:1-alpine
     links:
     - php:php.docker
-    # Set these values as you see fit in the override file.
-    # ports:
-    # - 80:8080
-    # - 443:4430
     volumes:
     - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     - ./docker/nginx/symfony.conf:/etc/nginx/conf.d/default.conf:ro
     - .:/opt/www
+    # Set these values as you see fit in the override file.
+    # ports:
+    # - 80:8080
+    # - 443:4430
 
   php:
     container_name: sp-php
-    image: seeruk/php-fpm:7.0-dev
+    image: seeruk/php-fpm:7.1-dev
+    # In case you want to use a dockerfile to extend current image
+    #    build:
+    #        context: .
+    #        dockerfile: Dockerfile
     environment:
-    # Set these to your UID and GID in the override file.
-    # - PHP_UID=1000
-    # - PHP_GID=1000
     - PHP_MEMORY_LIMIT=256M
     - PHP_POST_MAX_SIZE=128M
     - PHP_UPLOAD_MAX_FILESIZE=128M
@@ -29,12 +30,13 @@ services:
     - cache:cache.docker
     volumes:
     - .:/opt/www
+    # Set these to your UID and GID in the override file.
+    # - PHP_UID=1000
+    # - PHP_GID=1000
 
   db:
     container_name: sp-db
     image: postgres:9.6
-    ports:
-    - 5432:5432
     environment:
     - POSTGRES_PASSWORD=symfony_playground
     - POSTGRES_USER=symfony_playground

@@ -11,12 +11,17 @@
 
 # Managed by Composer
 /var/bootstrap.php.cache
+/var/SymfonyRequirements.php
 /bin/*
 !bin/console
 !bin/symfony_requirements
 
 # Assets and user uploads
 /web/bundles/
+/web/config.php
 
 # Vendor folder
 /vendor
+
+# Docker 
+docker-compose.override.yml

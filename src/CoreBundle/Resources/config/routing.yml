@@ -1,0 +1,18 @@
+homepage:
+    path:     /
+    defaults: { _controller: CoreBundle:Default:index }
+
+admin:
+    path:     /admin
+    defaults: { _controller: CoreBundle:Default:admin }
+
+login:
+    path:     /login
+    defaults: { _controller: CoreBundle:Security:login }
+
+registration:
+    path:     /register
+    defaults: { _controller: CoreBundle:Registration:register }
+
+logout:
+    path: /logout

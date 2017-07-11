@@ -1,0 +1,13 @@
+version: "3"
+# Server ports
+services:
+  web:
+    ports:
+    - 80:80
+  php:
+    environment:
+    - PHP_UID=1000
+    - PHP_GID=1000
+  db:
+    ports:
+    - 127.0.0.1:5432:5432
