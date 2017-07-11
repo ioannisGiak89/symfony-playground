@@ -22,3 +22,6 @@
 
 # Vendor folder
 /vendor
+
+# Docker 
+docker-compose.override.yml
