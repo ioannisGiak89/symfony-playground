@@ -37,8 +37,6 @@ services:
   db:
     container_name: sp-db
     image: postgres:9.6
-    ports:
-    - 5432:5432
     environment:
     - POSTGRES_PASSWORD=symfony_playground
     - POSTGRES_USER=symfony_playground
