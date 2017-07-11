@@ -1,7 +1,0 @@
-version: "3"
-
-services:
-  php:
-    environment:
-    - PHP_UID=502
-    - PHP_GID=20
